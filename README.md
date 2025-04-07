@@ -21,3 +21,5 @@ Then, with the virtual environment activated, you can download the project depen
 pip install django
 pip install djangorestframework
 ```
+
+Please don't hesitate to ask any questions about the first time setup, it can be pretty annoying
