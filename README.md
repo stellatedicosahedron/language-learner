@@ -13,7 +13,7 @@ Which will create the virtual environment. Then, in order to activate the virtua
 venv\Scripts\activate
 ```
 
-Whenever you want to deactivate the virtual environment, you can simply enter "deactivate" into the console.
+Whenever you want to deactivate the virtual environment, you can simply enter "deactivate" into the command line.
 
 Then, with the virtual environment activated, you can download the project dependencies:
 
