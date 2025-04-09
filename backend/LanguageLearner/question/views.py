@@ -4,7 +4,7 @@ from question.models import Question
 from .serializers import QuestionSerializer
 
 
-# Create your views here.
+# list all questions
 @api_view(["GET"])
 def question_list(request):
     question = Question.objects.all()
@@ -12,6 +12,7 @@ def question_list(request):
     return Response(serializer.data)
 
 
+# add a question
 @api_view(["POST"])
 def add_question(request):
     serializer = QuestionSerializer(data=request.data)

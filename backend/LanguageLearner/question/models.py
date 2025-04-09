@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# Create your models here.
+# Question model
 class Question(models.Model):
     question = models.CharField(max_length=100)
     prompt = models.CharField(max_length=100)
