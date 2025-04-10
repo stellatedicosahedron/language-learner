@@ -12,6 +12,13 @@ def question_list(request):
     return Response(serializer.data)
 
 
+# check the user's answer choice against the stored answer
+@api_view(["GET"])
+def check_answer(request, id, choice):
+    question = Question.objects.get(id=id)
+    return Response({"result": question.answer == choice})
+
+
 # add a question
 @api_view(["POST"])
 def add_question(request):
