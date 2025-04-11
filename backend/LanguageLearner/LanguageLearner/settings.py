@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "question",
     "quiz",
-    # 'users',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom user model
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
