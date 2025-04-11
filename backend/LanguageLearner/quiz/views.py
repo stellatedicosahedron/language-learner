@@ -54,3 +54,13 @@ def delete_quiz(request, id):
         f"The Question with id='{id}' was deleted successfully.",
         status=status.HTTP_200_OK,
     )
+
+
+# delete all quizzes from the database
+@api_view(["DELETE"])
+def delete_all_quizzes(request):
+    Quiz.objects.all().delete()
+    return Response(
+        "All stored Quizzes deleted successfully.",
+        status=status.HTTP_200_OK,
+    )

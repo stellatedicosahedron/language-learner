@@ -61,3 +61,13 @@ def delete_question(request, id):
         f"The Question with id='{id}' was deleted successfully.",
         status=status.HTTP_200_OK,
     )
+
+
+# delete all questions from the database
+@api_view(["DELETE"])
+def delete_all_questions(request):
+    Question.objects.all().delete()
+    return Response(
+        "All stored Questions deleted successfully.",
+        status=status.HTTP_200_OK,
+    )

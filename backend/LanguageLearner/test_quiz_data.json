@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1,
+        "fields": {
+            "name": "Quiz 1",
+            "level_requirement": 1,
+            "level_reward": 2
+        }
+    },
+    {
+        "pk": 2,
+        "fields": {
+            "name": "Quiz 2",
+            "level_requirement": 1,
+            "level_reward": 1
+        }
+    },
+    {
+        "pk": 3,
+        "fields": {
+            "name": "Quiz 3",
+            "level_requirement": 5,
+            "level_reward": 2
+        }
+    }
+]
