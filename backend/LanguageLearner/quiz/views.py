@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from quiz.models import Quiz
 from .serializers import QuizSerializer
-from question.models import Question
 from question.serializers import QuestionSerializer
 from django.shortcuts import get_object_or_404
 
@@ -52,6 +51,20 @@ def update_quiz(request, id):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+# add a quiz's level reward to the user's level
+@api_view(["PUT"])
+def add_level(request, id):
+    quiz = get_object_or_404(Quiz, id=id)
+    lvl_reward = getattr(quiz, "level_reward")
+    user = request.user
+    if user.is_authenticated:
+        user.level = user.level + lvl_reward
+        user.save(update_fields=["level"])
+        return Response(dict(level=user.level), status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 

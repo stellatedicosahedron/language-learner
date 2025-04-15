@@ -11,6 +11,8 @@ class Command(BaseCommand):
         with open("test_question_data.json", "r") as file:
             data = json.load(file)
 
+        count = 0
+
         for item in data:
             question = Question(
                 pk=item["pk"],
@@ -21,9 +23,10 @@ class Command(BaseCommand):
                 quiz=Quiz.objects.get(id=item["quiz"]),
             )
             question.save()
+            count = count + 1
 
         file.close()
 
         self.stdout.write(
-            self.style.SUCCESS("Successfully added Question data to the DB.")
+            self.style.SUCCESS(f"Successfully added {count} Questions to the DB.")
         )

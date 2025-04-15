@@ -2,19 +2,22 @@
     {
         "pk": 1,
         "name": "Quiz 1",
+        "language": "jp",
         "level_requirement": 1,
         "level_reward": 2
     },
     {
         "pk": 2,
         "name": "Quiz 2",
-        "level_requirement": 1,
-        "level_reward": 1
+        "language": "jp",
+        "level_requirement": 5,
+        "level_reward": 2
     },
     {
         "pk": 3,
         "name": "Quiz 3",
-        "level_requirement": 5,
-        "level_reward": 2
+        "language": "kr",
+        "level_requirement": 1,
+        "level_reward": 1
     }
 ]

@@ -4,7 +4,7 @@ import json
 
 
 class Command(BaseCommand):
-    help = "Adds User data to the database. Overwrites data if primary key previously existed."
+    help = "Adds User data to the database."
 
     def handle(self, **options):
         with open("test_user_data.json", "r") as file:
