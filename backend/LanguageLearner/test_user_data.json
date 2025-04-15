@@ -1,0 +1,16 @@
+[
+    {
+        "username": "user1",
+        "password": "pass1",
+        "confirm_password": "pass1",
+        "level": 1,
+        "email": "test@hotmail.com"
+    },
+    {
+        "username": "user2",
+        "password": "pass2",
+        "confirm_password": "pass2",
+        "level": 5,
+        "email": "mymail@hotmail.com"
+    }
+]

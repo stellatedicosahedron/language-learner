@@ -13,9 +13,9 @@ class Command(BaseCommand):
         for item in data:
             quiz = Quiz(
                 pk=item["pk"],
-                name=item["fields"]["name"],
-                level_requirement=item["fields"]["level_requirement"],
-                level_reward=item["fields"]["level_reward"],
+                name=item["name"],
+                level_requirement=item["level_requirement"],
+                level_reward=item["level_reward"],
             )
             quiz.save()
 

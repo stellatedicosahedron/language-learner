@@ -19,7 +19,13 @@ class Question(models.Model):
             "4": "Choice 4",
         }
     )
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, default=None, null=True)
+    quiz = models.ForeignKey(
+        Quiz,
+        on_delete=models.CASCADE,
+        related_name="questions",
+        default=None,
+        null=True,
+    )
 
     # determines what the string version of the object returns
     def __str__(self):

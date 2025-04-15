@@ -14,11 +14,11 @@ class Command(BaseCommand):
         for item in data:
             question = Question(
                 pk=item["pk"],
-                question=item["fields"]["question"],
-                prompt=item["fields"]["prompt"],
-                answer=item["fields"]["answer"],
-                choices=item["fields"]["choices"],
-                quiz=Quiz.objects.get(id=item["fields"]["quiz"]),
+                question=item["question"],
+                prompt=item["prompt"],
+                answer=item["answer"],
+                choices=item["choices"],
+                quiz=Quiz.objects.get(id=item["quiz"]),
             )
             question.save()
 
