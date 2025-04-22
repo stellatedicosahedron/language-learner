@@ -10,4 +10,5 @@ urlpatterns = [
     path("add_level/<int:id>/", views.add_level),
     path("delete/<int:id>/", views.delete_quiz),
     path("delete_all/", views.delete_all_quizzes),
+    path("add_quizzes/", views.add_quizzes),
 ]

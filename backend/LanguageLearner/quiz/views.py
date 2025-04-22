@@ -5,6 +5,8 @@ from quiz.models import Quiz
 from .serializers import QuizSerializer
 from question.serializers import QuestionSerializer
 from django.shortcuts import get_object_or_404
+import json
+import os
 
 
 # get a quiz's fields given its id
@@ -86,5 +88,34 @@ def delete_all_quizzes(request):
     Quiz.objects.all().delete()
     return Response(
         "All stored Quizzes deleted successfully.",
+        status=status.HTTP_200_OK,
+    )
+
+
+# add quizzes from test data json file
+@api_view(["POST"])
+def add_quizzes(request):
+    print(os.getcwd())
+
+    with open("backend/LanguageLearner/quiz/test_quiz_data.json", "r") as file:
+        data = json.load(file)
+
+    count = 0
+
+    for item in data:
+        quiz = Quiz(
+            pk=item["pk"],
+            name=item["name"],
+            language=item["language"],
+            level_requirement=item["level_requirement"],
+            level_reward=item["level_reward"],
+        )
+        quiz.save()
+        count = count + 1
+
+    file.close()
+
+    return Response(
+        f"Successfully added {count} Quizzes to the DB.",
         status=status.HTTP_200_OK,
     )
