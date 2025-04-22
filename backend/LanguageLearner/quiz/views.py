@@ -97,7 +97,7 @@ def delete_all_quizzes(request):
 def add_quizzes(request):
     print(os.getcwd())
 
-    with open("quiz/test_quiz_data.json", "r") as file:
+    with open("backend/LanguageLearner/quiz/test_quiz_data.json", "r") as file:
         data = json.load(file)
 
     count = 0

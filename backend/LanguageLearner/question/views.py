@@ -78,7 +78,7 @@ def delete_all_questions(request):
 # add questions from test data json file
 @api_view(["POST"])
 def add_questions(request):
-    with open("question/test_question_data.json", "r") as file:
+    with open("backend/LanguageLearner/question/test_question_data.json", "r") as file:
         data = json.load(file)
 
     count = 0
