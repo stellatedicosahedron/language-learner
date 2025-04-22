@@ -45,6 +45,7 @@ fun MainDisplay(
                 LoginScreen(
                     onLoginButtonClick = {
                         navController.navigate(LLAScreen.LangSelect.name)
+                        // login validation and whatnot
                     },
                     onCreateButtonClick = {
                         navController.navigate(LLAScreen.CreateAccount.name)
