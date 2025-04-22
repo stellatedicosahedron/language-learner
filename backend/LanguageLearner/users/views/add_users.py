@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from ..serializers import UserSerializer
+from django.db import IntegrityError
 import json
 
 
@@ -20,11 +21,14 @@ class AddUsers(APIView):
 
         for item in data:
             user = UserSerializer(data=item)
-            if user.is_valid():
-                user.save()
-                count = count + 1
-            else:
-                print(user.errors)
+            try:
+                if user.is_valid():
+                    user.save()
+                    count = count + 1
+                else:
+                    print(user.errors)
+            except IntegrityError:
+                pass
 
         file.close()
 
