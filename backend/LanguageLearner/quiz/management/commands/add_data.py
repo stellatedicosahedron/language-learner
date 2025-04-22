@@ -5,7 +5,7 @@ import json
 
 
 class Command(BaseCommand):
-    help = "Adds User/Quiz/Question data to the database. Overwrites data if primary key previously existed."
+    help = "Adds Quiz/Question data to the database. Overwrites data if primary key previously existed."
 
     def handle(self, **options):
         # quiz import section

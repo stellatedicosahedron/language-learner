@@ -2,8 +2,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from question.models import Question
+from quiz.models import Quiz
 from .serializers import QuestionSerializer
 from django.shortcuts import get_object_or_404
+import json
 
 
 # get a question's fields given its id
@@ -69,5 +71,36 @@ def delete_all_questions(request):
     Question.objects.all().delete()
     return Response(
         "All stored Questions deleted successfully.",
+        status=status.HTTP_200_OK,
+    )
+
+
+# add questions from test data json file
+@api_view(["POST"])
+def add_questions(request):
+    with open("question/test_question_data.json", "r") as file:
+        data = json.load(file)
+
+    count = 0
+
+    for item in data:
+        try:
+            question = Question(
+                pk=item["pk"],
+                question=item["question"],
+                prompt=item["prompt"],
+                answer=item["answer"],
+                choices=item["choices"],
+                quiz=Quiz.objects.get(id=item["quiz"]),
+            )
+            question.save()
+            count = count + 1
+        except Quiz.DoesNotExist:
+            pass
+
+    file.close()
+
+    return Response(
+        f"Successfully added {count} Questions to the DB.",
         status=status.HTTP_200_OK,
     )
