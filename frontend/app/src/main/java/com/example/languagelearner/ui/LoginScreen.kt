@@ -1,12 +1,15 @@
 package com.example.languagelearner.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -16,17 +19,15 @@ fun LoginScreen(
     onLoginButtonClick: () -> Unit, // the composable takes two lambdas as parameters
     onCreateButtonClick: () -> Unit, // which handle the navigation
 ) {
-    Surface (
-        color = Color.hsv(0.20F, 0.07F, 0.18F)
-    )
-    {
+    LanguageLearnerTheme {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
         ) {
             Text(
-                text = "Login Page CHANGE TO STRING RESOURCE",
-                color = Color.hsv(0.37F, 0.03F, 0.97F)
+                text = "Login Page CHANGE TO STRING RESOURCE"
             )
             Button(
                 onClick = onLoginButtonClick

@@ -9,19 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun LanguageSelectScreen(
+fun QuizSelectScreen(
     modifier: Modifier = Modifier,
-    onLangSelectClick: () -> Unit
+    onCreateButtonClick: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
         Text(
-            text = "Create Account Page CHANGE TO STRING RESOURCE"
+            text = "Quiz Select Page CHANGE TO STRING RESOURCE"
         )
         Button(
-            onClick = onLangSelectClick
+            onClick = onCreateButtonClick
         ) {
             Text( text = "Create Account CHANGE TO STRING RESOURCE")
         }

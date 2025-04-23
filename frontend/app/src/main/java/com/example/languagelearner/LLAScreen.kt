@@ -14,6 +14,8 @@ import androidx.navigation.compose.composable
 import com.example.languagelearner.ui.LoginScreen
 import com.example.languagelearner.ui.CreateAccountScreen
 import com.example.languagelearner.ui.LanguageSelectScreen
+import com.example.languagelearner.ui.theme.LanguageLearnerTheme
+import com.example.languagelearner.ui.QuizSelectScreen
 
 // This class just serves as a list of names for each route in the app
 enum class LLAScreen() {
@@ -32,38 +34,48 @@ enum class LLAScreen() {
 fun MainDisplay(
     navController: NavHostController = rememberNavController()
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+    LanguageLearnerTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-        NavHost(
-            navController = navController,
-            startDestination = LLAScreen.Login.name, // the default page on startup
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            // in this function body, each call to a composable function dictates behaviour
-            // at a different screen
-            composable(route = LLAScreen.Login.name) {
-                LoginScreen(
-                    onLoginButtonClick = {
-                        navController.navigate(LLAScreen.LangSelect.name)
-                        // login validation and whatnot
-                    },
-                    onCreateButtonClick = {
-                        navController.navigate(LLAScreen.CreateAccount.name)
-                    }
-                )
-            }
-            composable(route = LLAScreen.CreateAccount.name) {
-                CreateAccountScreen(
-                    onCreateButtonClick = {
-                        navController.popBackStack(LLAScreen.Login.name, false)
-                    }
-                )
-            }
-            composable(route = LLAScreen.LangSelect.name) {
-                LanguageSelectScreen(
+            NavHost(
+                navController = navController,
+                startDestination = LLAScreen.Login.name, // the default page on startup
+                modifier = Modifier.padding(innerPadding)
+            ) {
+                // in this function body, each call to a composable function dictates behaviour
+                // at a different screen
+                composable(route = LLAScreen.Login.name) {
+                    LoginScreen(
+                        onLoginButtonClick = {
+                            navController.navigate(LLAScreen.LangSelect.name)
+                            // login validation and whatnot
+                        },
+                        onCreateButtonClick = {
+                            navController.navigate(LLAScreen.CreateAccount.name)
+                        }
+                    )
+                }
+                composable(route = LLAScreen.CreateAccount.name) {
+                    CreateAccountScreen(
+                        onCreateButtonClick = {
+                            navController.popBackStack(LLAScreen.Login.name, false)
+                        }
+                    )
+                }
+                composable(route = LLAScreen.LangSelect.name) {
+                    LanguageSelectScreen(
+                        onLangSelectClick = {
+                            navController.navigate(LLAScreen.QuizSelect.name)
+                        }
+                    )
+                }
+                composable(route = LLAScreen.QuizSelect.name) {
+                    QuizSelectScreen {
 
-                )
+                    }
+                }
             }
         }
     }
+
 }
