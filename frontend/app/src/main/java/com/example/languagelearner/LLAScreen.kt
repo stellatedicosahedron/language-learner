@@ -34,7 +34,7 @@ enum class LLAScreen() {
 fun MainDisplay(
     navController: NavHostController = rememberNavController()
 ) {
-    LanguageLearnerTheme {
+    LanguageLearnerTheme(darkTheme = true) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
             NavHost(
