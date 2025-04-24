@@ -18,12 +18,12 @@ fun QuizSelectScreen(
         modifier = modifier
     ) {
         Text(
-            text = "Quiz Select Page CHANGE TO STRING RESOURCE"
+            text = "Quiz Select Page"
         )
         Button(
             onClick = onCreateButtonClick
         ) {
-            Text( text = "Create Account CHANGE TO STRING RESOURCE")
+            Text( text = "Quiz Placeholder")
         }
     }
 }
