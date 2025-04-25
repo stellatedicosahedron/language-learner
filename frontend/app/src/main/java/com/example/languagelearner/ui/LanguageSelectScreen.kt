@@ -1,12 +1,17 @@
 package com.example.languagelearner.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 
 @Composable
 fun LanguageSelectScreen(
@@ -15,7 +20,9 @@ fun LanguageSelectScreen(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
     ) {
         Text(
             text = "Select a Language to Learn"
@@ -28,4 +35,13 @@ fun LanguageSelectScreen(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun Test(
+
+) {
+    LanguageLearnerTheme(darkTheme = true) { LanguageSelectScreen {  } }
+
 }
