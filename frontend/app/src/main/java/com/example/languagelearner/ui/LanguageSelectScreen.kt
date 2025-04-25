@@ -25,12 +25,14 @@ fun LanguageSelectScreen(
             .fillMaxHeight()
     ) {
         Text(
-            text = "Language Select Page"
+            text = "Select a Language to Learn"
         )
         Button(
             onClick = onLangSelectClick
         ) {
-            Text( text = "Select Quiz" )
+            Text(
+                text = "Go to Quiz"
+            )
         }
     }
 }
