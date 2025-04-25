@@ -125,8 +125,8 @@ val surfaceContainerLightHighContrast = Color(0xFFE7E1E0)
 val surfaceContainerHighLightHighContrast = Color(0xFFD9D3D2)
 val surfaceContainerHighestLightHighContrast = Color(0xFFCAC5C5)
 
-val primaryDark = Color(0xFFD6C2C2)
-val onPrimaryDark = Color(0xFF3A2D2D)
+val primaryDark = Color.hsv(42F, 0.45F, 0.80F) // elements like buttons
+val onPrimaryDark = Color.hsv(37F, 0.03F, 0.97F) // text on buttons
 val primaryContainerDark = Color(0xFF352929)
 val onPrimaryContainerDark = Color(0xFFA18F8F)
 val secondaryDark = Color(0xFFFFFFFF)
