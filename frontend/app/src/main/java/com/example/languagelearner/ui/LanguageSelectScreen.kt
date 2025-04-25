@@ -18,12 +18,14 @@ fun LanguageSelectScreen(
         modifier = modifier
     ) {
         Text(
-            text = "Create Account Page CHANGE TO STRING RESOURCE"
+            text = "Select a Language to Learn"
         )
         Button(
             onClick = onLangSelectClick
         ) {
-            Text( text = "Create Account CHANGE TO STRING RESOURCE")
+            Text(
+                text = "Go to Quiz"
+            )
         }
     }
 }
