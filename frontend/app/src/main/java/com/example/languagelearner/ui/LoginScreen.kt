@@ -27,11 +27,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.languagelearner.R
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
+    loginViewModel: LoginViewModel = viewModel(),
     onLoginButtonClick: () -> Unit, // the composable takes two lambdas as parameters
     onCreateButtonClick: () -> Unit, // which handle the navigation
 ) {
@@ -50,7 +52,11 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(20.dp))
             // here
             LoginField(
-                modifier = modifier
+                modifier = modifier,
+                usernameInput = loginViewModel.usernameInput,
+                passwordInput = loginViewModel.passwordInput,
+                onUsernameChange = { loginViewModel.updateUsernameInput(it) },
+                onPasswordChange = { loginViewModel.updatePasswordInput(it) }
             )
             // to here
             Spacer(modifier = Modifier.height(20.dp))
@@ -99,19 +105,24 @@ fun PasswordField(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun LoginField(modifier: Modifier = Modifier) {
+fun LoginField(
+    modifier: Modifier = Modifier,
+    usernameInput: String,
+    passwordInput: String,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit
+) {
     Column(
         modifier = Modifier
     ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
         Text(
             text = stringResource(R.string.username),
             modifier = Modifier.align(Alignment.Start)
         )
+        // Username field
         TextField(
-            value = username,
-            onValueChange = { username = it },
+            value = usernameInput,
+            onValueChange = onUsernameChange,
             modifier = modifier.fillMaxWidth(),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -119,9 +130,10 @@ fun LoginField(modifier: Modifier = Modifier) {
             text = stringResource(R.string.password),
             modifier = Modifier.align(Alignment.Start)
         )
+        // Password field
         TextField(
-            value = password,
-            onValueChange = { password = it },
+            value = passwordInput,
+            onValueChange = onPasswordChange,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = modifier.fillMaxWidth(),
