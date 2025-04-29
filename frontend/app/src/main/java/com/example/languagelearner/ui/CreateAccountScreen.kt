@@ -35,7 +35,7 @@ import io.ktor.utils.io.core.Input
 @Composable
 fun CreateAccountScreen(
     modifier: Modifier = Modifier,
-    loginViewModel: LoginViewModel = viewModel(),
+    loginViewModel: LoginViewModel,
     onCreateButtonClick: () -> Unit
 ) {
     Column(
@@ -134,6 +134,7 @@ fun CreateScreenPreview() {
     LanguageLearnerTheme(darkTheme = true) {
         CreateAccountScreen(
             modifier = Modifier,
+            loginViewModel = LoginViewModel(),
             onCreateButtonClick = {}
         )
     }

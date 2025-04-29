@@ -33,7 +33,7 @@ import com.example.languagelearner.R
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    loginViewModel: LoginViewModel = viewModel(),
+    loginViewModel: LoginViewModel,
     onLoginButtonClick: () -> Unit, // the composable takes two lambdas as parameters
     onCreateButtonClick: () -> Unit, // which handle the navigation
 ) {
@@ -148,6 +148,7 @@ fun LoginScreenPreview(){
     LanguageLearnerTheme(darkTheme = true) {
         LoginScreen(
             modifier = Modifier,
+            loginViewModel = LoginViewModel(),
             onLoginButtonClick = {},
             onCreateButtonClick = {}
             )
