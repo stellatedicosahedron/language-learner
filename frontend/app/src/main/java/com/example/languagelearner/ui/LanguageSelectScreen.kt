@@ -51,7 +51,7 @@ fun LanguageSelectScreen(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(horizontal = 40.dp)
+            .padding(horizontal = 25.dp)
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
