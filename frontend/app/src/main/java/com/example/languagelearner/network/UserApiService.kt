@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 private const val BASE_URL =
@@ -15,11 +16,11 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface UserApiService {
-    @POST("api/create")
-    suspend fun createUser(): String
+    @POST("api/users/create/")
+    suspend fun createUser(): User
 
-    @POST("api/login")
-    suspend fun loginUser(): String
+    @POST("api/users/login/")
+    suspend fun loginUser(@Body user: User): User
 }
 
 // singleton design pattern is not encouraged! But it's what I found in the tutorial

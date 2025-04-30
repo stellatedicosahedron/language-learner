@@ -52,7 +52,13 @@ fun MainDisplay(
                     LoginScreen(
                         loginViewModel = loginViewModel,
                         onLoginButtonClick = {
-                            navController.navigate(LLAScreen.LangSelect.name)
+                            loginViewModel.loginUser()
+                            if (loginViewModel.loginState) {
+                                navController.navigate(LLAScreen.LangSelect.name)
+                            } else {
+                                print(loginViewModel.errorMessage)
+                            }
+
                             // login validation and whatnot
                         },
                         onCreateButtonClick = {

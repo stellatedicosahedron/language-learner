@@ -5,11 +5,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.languagelearner.network.User
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import com.example.languagelearner.network.UserApi
 
 class LoginViewModel : ViewModel() {
     var loginState = false
+    var errorMessage by mutableStateOf("")
 
     // instead of storing these in the UI, we store these here
     // as before, these are state variables
@@ -40,21 +44,24 @@ class LoginViewModel : ViewModel() {
     }
 
     // retrofit stuff starts here
-    private fun createUser() {
+    fun createUser() {
         viewModelScope.launch {
 
         }
     }
 
-    private fun loginUser() {
+    fun loginUser() {
         try{
             viewModelScope.launch {
-                // retrofitService.loginUser()
+                UserApi.retrofitService
+                    .loginUser(User(usernameInput, passwordInput, confirmPasswordInput))
                 loginState = true
             }
-        }
-        catch (e: HttpException) {
-            loginState = false // the failed login exception is prolly handled elsewhere
+        } catch (e: HttpException) {
+            loginState = false // login failed due to validation reasons
+            errorMessage = e.message.toString()
+        } catch (e: IOException) {
+            loginState = false // login failed due to internet connection reasons
         }
     }
 }
