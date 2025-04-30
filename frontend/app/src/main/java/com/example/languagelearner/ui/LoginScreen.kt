@@ -76,7 +76,8 @@ fun LoginScreen(
                     Text( text = stringResource(R.string.login))
                 }
             }
-
+            Spacer(modifier = Modifier.height(20.dp))
+            Text( text = loginViewModel.errorMessage )
 
         }
 

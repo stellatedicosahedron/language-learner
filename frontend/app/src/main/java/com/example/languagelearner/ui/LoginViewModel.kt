@@ -51,17 +51,20 @@ class LoginViewModel : ViewModel() {
     }
 
     fun loginUser() {
-        try{
-            viewModelScope.launch {
-                UserApi.retrofitService
-                    .loginUser(User(usernameInput, passwordInput, confirmPasswordInput))
-                loginState = true
+        viewModelScope.launch {
+            try{
+                    UserApi.retrofitService
+                        .loginUser(User(usernameInput, passwordInput, confirmPasswordInput))
+                    // this is scuffed but I just want this to work for now
+                    loginState = true
+
+            } catch (e: HttpException) {
+                loginState = false // login failed due to validation reasons
+                errorMessage = e.message.toString()
+            } catch (e: IOException) {
+                loginState = false // login failed due to internet connection reasons
+                errorMessage = "internet issue"
             }
-        } catch (e: HttpException) {
-            loginState = false // login failed due to validation reasons
-            errorMessage = e.message.toString()
-        } catch (e: IOException) {
-            loginState = false // login failed due to internet connection reasons
         }
     }
 }
