@@ -25,12 +25,16 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.languagelearner.R
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
+import io.ktor.utils.io.core.Input
 
 @Composable
 fun CreateAccountScreen(
     modifier: Modifier = Modifier,
+    loginViewModel: LoginViewModel,
     onCreateButtonClick: () -> Unit
 ) {
     Column(
@@ -46,7 +50,15 @@ fun CreateAccountScreen(
             fontSize = 30.sp
         )
         Spacer(modifier = Modifier.height(20.dp))
-        CreateAccountField(modifier)
+        CreateAccountField(
+            modifier,
+            usernameInput = loginViewModel.usernameInput,
+            passwordInput = loginViewModel.passwordInput,
+            confirmPasswordInput = loginViewModel.confirmPasswordInput,
+            onUsernameChange = { loginViewModel.updateUsernameInput(it) },
+            onPasswordChange = { loginViewModel.updatePasswordInput(it) },
+            onConfirmPasswordChange = { loginViewModel.updateConfirmPasswordInput(it) }
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row (
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -65,20 +77,25 @@ fun CreateAccountScreen(
 }
 
 @Composable
-fun CreateAccountField(modifier: Modifier = Modifier) {
+fun CreateAccountField(
+    modifier: Modifier = Modifier,
+    usernameInput: String,
+    passwordInput: String,
+    confirmPasswordInput: String,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onConfirmPasswordChange: (String) -> Unit
+) {
     Column(
         modifier = Modifier
     ) {
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
-        var confirmPassword by remember { mutableStateOf("") }
         Text(
             text = stringResource(R.string.username),
             modifier = Modifier.align(Alignment.Start)
         )
         TextField(
-            value = username,
-            onValueChange = { username = it },
+            value = usernameInput,
+            onValueChange = onUsernameChange,
             modifier = modifier.fillMaxWidth(),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -87,8 +104,8 @@ fun CreateAccountField(modifier: Modifier = Modifier) {
             modifier = Modifier.align(Alignment.Start)
         )
         TextField(
-            value = password,
-            onValueChange = { password = it },
+            value = passwordInput,
+            onValueChange = onPasswordChange,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = modifier.fillMaxWidth(),
@@ -99,8 +116,8 @@ fun CreateAccountField(modifier: Modifier = Modifier) {
             modifier = Modifier.align(Alignment.Start)
         )
         TextField(
-            value = confirmPassword,
-            onValueChange = { confirmPassword = it },
+            value = confirmPasswordInput,
+            onValueChange = onConfirmPasswordChange,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = modifier.fillMaxWidth(),
@@ -116,6 +133,7 @@ fun CreateScreenPreview() {
     LanguageLearnerTheme(darkTheme = true) {
         CreateAccountScreen(
             modifier = Modifier,
+            loginViewModel = LoginViewModel(),
             onCreateButtonClick = {}
         )
     }

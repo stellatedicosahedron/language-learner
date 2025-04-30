@@ -21,10 +21,9 @@ class LoginUser(APIView):
             login(request, user)
             response = Response(
             {
-                "user": {
-                    "id": user.id,
-                    "username": user.username,
-                },
+                "id": user.id,
+                "username": user.username,
+                
             },
             status=status.HTTP_200_OK,
             )

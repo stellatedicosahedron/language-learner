@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
@@ -14,6 +15,7 @@ import androidx.navigation.compose.composable
 import com.example.languagelearner.ui.LoginScreen
 import com.example.languagelearner.ui.CreateAccountScreen
 import com.example.languagelearner.ui.LanguageSelectScreen
+import com.example.languagelearner.ui.LoginViewModel
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 import com.example.languagelearner.ui.QuizSelectScreen
 
@@ -32,7 +34,8 @@ enum class LLAScreen() {
 @Preview
 @Composable
 fun MainDisplay(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    loginViewModel: LoginViewModel = viewModel()
 ) {
     LanguageLearnerTheme(darkTheme = true) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -45,9 +48,17 @@ fun MainDisplay(
                 // in this function body, each call to a composable function dictates behaviour
                 // at a different screen
                 composable(route = LLAScreen.Login.name) {
+                    loginViewModel.clearFields()
                     LoginScreen(
+                        loginViewModel = loginViewModel,
                         onLoginButtonClick = {
-                            navController.navigate(LLAScreen.LangSelect.name)
+                            loginViewModel.loginUser()
+                            if (loginViewModel.loginState) {
+                                navController.navigate(LLAScreen.LangSelect.name)
+                            } else {
+                                print(loginViewModel.errorMessage)
+                            }
+
                             // login validation and whatnot
                         },
                         onCreateButtonClick = {
@@ -56,7 +67,9 @@ fun MainDisplay(
                     )
                 }
                 composable(route = LLAScreen.CreateAccount.name) {
+                    loginViewModel.clearFields()
                     CreateAccountScreen(
+                        loginViewModel = loginViewModel,
                         onCreateButtonClick = {
                             navController.popBackStack(LLAScreen.Login.name, false)
                         }
