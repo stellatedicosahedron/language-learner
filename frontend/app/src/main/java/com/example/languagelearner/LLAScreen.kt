@@ -53,16 +53,14 @@ fun MainDisplay(
                     LoginScreen(
                         loginViewModel = loginViewModel,
                         onLoginButtonClick = {
+                            loginViewModel.clearErrorMessage()
                             loginViewModel.loginUser()
                             if (loginViewModel.loginState) {
                                 navController.navigate(LLAScreen.LangSelect.name)
-                            } else {
-                                // print(loginViewModel.errorMessage)
                             }
-
-                            // login validation and whatnot
                         },
                         onCreateButtonClick = {
+                            loginViewModel.createState = false
                             navController.navigate(LLAScreen.CreateAccount.name)
                         }
                     )
@@ -72,7 +70,14 @@ fun MainDisplay(
                     CreateAccountScreen(
                         loginViewModel = loginViewModel,
                         onCreateButtonClick = {
-                            navController.popBackStack(LLAScreen.Login.name, false)
+                            loginViewModel.clearErrorMessage()
+                            loginViewModel.createUser()
+                            if (loginViewModel.createState) {
+                                loginViewModel.clearFields()
+                                // if account creation successful, clear the fields and
+                                // return to the login page
+                                navController.popBackStack(LLAScreen.Login.name, false)
+                            }
                         }
                     )
                 }

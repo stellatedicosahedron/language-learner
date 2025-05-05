@@ -19,10 +19,10 @@ private val retrofit = Retrofit.Builder()
 
 interface UserApiService {
     @POST("api/users/create/")
-    suspend fun createUser(): User
+    suspend fun createUser(@Body user: User): DetailResponse
 
     @POST("api/users/login/")
-    suspend fun loginUser(@Body user: User): UserResponse
+    suspend fun loginUser(@Body user: User): DetailResponse
 }
 
 // singleton design pattern is not encouraged! But it's what I found in the tutorial

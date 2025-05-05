@@ -13,6 +13,7 @@ import com.example.languagelearner.network.UserApi
 
 class LoginViewModel : ViewModel() {
     var loginState = false
+    var createState = false
     var errorMessage by mutableStateOf("")
 
     // instead of storing these in the UI, we store these here
@@ -43,10 +44,26 @@ class LoginViewModel : ViewModel() {
         updateConfirmPasswordInput("")
     }
 
+    fun clearErrorMessage() {
+        errorMessage = ""
+    }
+
     // retrofit stuff starts here
     fun createUser() {
         viewModelScope.launch {
+            try{
+                UserApi.retrofitService
+                    .createUser(User(usernameInput, passwordInput, confirmPasswordInput))
+                // this is scuffed but I just want this to work for now
+                createState = true
 
+            } catch (e: HttpException) {
+                loginState = false // login failed due to validation reasons
+                errorMessage = e.message.toString()
+            } catch (e: IOException) {
+                loginState = false // login failed due to internet connection reasons
+                errorMessage = "internet issue"
+            }
         }
     }
 

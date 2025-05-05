@@ -20,12 +20,8 @@ class LoginUser(APIView):
         if user is not None:
             login(request, user)
             response = Response(
-            {
-                "id": user.id,
-                "username": user.username,
-                
-            },
-            status=status.HTTP_200_OK,
+                {"detail": "Successfully logged in."},
+                status=status.HTTP_200_OK,
             )
 
             return response

@@ -22,10 +22,8 @@ class CreateUser(APIView):
         if serializer.is_valid():
             user = serializer.save()
             response = Response(
-                {
-                    "user": serializer.data,
-                },
-                status=status.HTTP_201_CREATED,
+                {"detail": "Successfully created user."},
+                status=status.HTTP_200_OK,
             )
 
             return response
