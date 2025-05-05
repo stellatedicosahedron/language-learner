@@ -71,7 +71,8 @@ fun CreateAccountScreen(
                 Text (text = stringResource(R.string.create_account) )
             }
         }
-
+        Spacer(modifier = Modifier.height(20.dp))
+        Text( text = loginViewModel.errorMessage )
 
     }
 }
