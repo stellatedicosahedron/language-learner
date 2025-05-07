@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.languagelearner.ui.LoginScreen
 import com.example.languagelearner.ui.CreateAccountScreen
+import com.example.languagelearner.ui.LangViewModel
 import com.example.languagelearner.ui.LanguageSelectScreen
 import com.example.languagelearner.ui.LoginViewModel
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
@@ -36,14 +37,15 @@ enum class LLAScreen() {
 @Composable
 fun MainDisplay(
     navController: NavHostController = rememberNavController(),
-    loginViewModel: LoginViewModel = viewModel()
+    loginViewModel: LoginViewModel = viewModel(),
+    langViewModel: LangViewModel = viewModel()
 ) {
     LanguageLearnerTheme(darkTheme = true) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
             NavHost(
                 navController = navController,
-                startDestination = LLAScreen.Login.name, // the default page on startup
+                startDestination = LLAScreen.LangSelect.name, // the default page on startup
                 modifier = Modifier.padding(innerPadding)
             ) {
                 // in this function body, each call to a composable function dictates behaviour
@@ -79,14 +81,16 @@ fun MainDisplay(
                 composable(route = LLAScreen.LangSelect.name) {
                     LanguageSelectScreen(
                         onLangSelectClick = {
+                            shortLang: String -> langViewModel.updateLanguageSelection(shortLang)
                             navController.navigate(LLAScreen.QuizSelect.name)
                         }
                     )
                 }
                 composable(route = LLAScreen.QuizSelect.name) {
-                    QuizSelectScreen {
-
-                    }
+                    QuizSelectScreen (
+                        langViewModel = langViewModel,
+                        onCreateButtonClick = {}
+                    )
                 }
             }
         }

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,13 +38,24 @@ fun LanguageSelectScreen(
     modifier: Modifier = Modifier,
     onLangSelectClick: () -> Unit
 ) {
-    val langList = listOf("Japanese", "Korean", "Chinese", "French")
+    val langList = listOf(
+        "Japanese",
+        "Korean",
+        "Chinese",
+        "French"
+    )
     val imageList = listOf(
         painterResource(id = R.drawable.japanese),
         painterResource(id = R.drawable.korean),
         painterResource(id = R.drawable.chinese),
         painterResource(id = R.drawable.french),
         )
+    val shortLangList = listOf(
+        "jp",
+        "kr",
+        "cn",
+        "fr"
+    )
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -71,7 +79,15 @@ fun LanguageSelectScreen(
             items(langList.size) {
                 val item = langList[it]
                 val painter = imageList[it]
-                ImageCard(item, painter, item, onLangSelectClick, Modifier)
+                val shortLang = shortLangList[it]
+                ImageCard(
+                    shortLang,
+                    item,
+                    painter,
+                    item,
+                    onLangSelectClick,
+                    Modifier
+                )
             }
         }
     }
@@ -81,6 +97,7 @@ fun LanguageSelectScreen(
 // arguments are an image, description, title, and modifier
 @Composable
 fun ImageCard(
+    shortLang: String,
     title: String,
     painter: Painter,
     contentDescription: String,
@@ -90,7 +107,7 @@ fun ImageCard(
     Card (
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
-        onClick = onLangSelectClick,
+        onClick = { onLangSelectClick(shortLang) },
         modifier = modifier
             .fillMaxWidth()
             .padding(7.dp, 7.dp)
@@ -136,6 +153,8 @@ fun ImageCard(
 fun Test(
 
 ) {
-    LanguageLearnerTheme(darkTheme = true) { LanguageSelectScreen {  } }
+    LanguageLearnerTheme(darkTheme = true) { LanguageSelectScreen (
+        onLangSelectClick = {}
+    ) }
 
 }
