@@ -15,8 +15,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface LangApiService {
-    @GET("quiz/get/1?format=json")
-    suspend fun getQuiz(): Quiz
+    @GET("quiz/")
+    suspend fun getQuizzes(): List<Quiz>
 }
 
 object LangApi {

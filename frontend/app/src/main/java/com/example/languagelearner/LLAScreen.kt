@@ -45,7 +45,7 @@ fun MainDisplay(
 
             NavHost(
                 navController = navController,
-                startDestination = LLAScreen.LangSelect.name, // the default page on startup
+                startDestination = LLAScreen.Login.name, // the default page on startup
                 modifier = Modifier.padding(innerPadding)
             ) {
                 // in this function body, each call to a composable function dictates behaviour
@@ -81,7 +81,8 @@ fun MainDisplay(
                 composable(route = LLAScreen.LangSelect.name) {
                     LanguageSelectScreen(
                         onLangSelectClick = {
-                            shortLang: String -> langViewModel.updateLanguageSelection(shortLang)
+                            shortLang: String -> langViewModel.updateShortLangSelection(shortLang)
+                            langViewModel.getQuizzes()
                             navController.navigate(LLAScreen.QuizSelect.name)
                         }
                     )
@@ -89,7 +90,9 @@ fun MainDisplay(
                 composable(route = LLAScreen.QuizSelect.name) {
                     QuizSelectScreen (
                         langViewModel = langViewModel,
-                        onCreateButtonClick = {}
+                        onQuizSelectionClick = {
+                            navController.navigate(LLAScreen.Login.name)
+                        }
                     )
                 }
             }

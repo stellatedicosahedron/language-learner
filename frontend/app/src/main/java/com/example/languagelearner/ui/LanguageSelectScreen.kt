@@ -36,7 +36,7 @@ import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 @Composable
 fun LanguageSelectScreen(
     modifier: Modifier = Modifier,
-    onLangSelectClick: () -> Unit
+    onLangSelectClick: (String) -> Unit
 ) {
     val langList = listOf(
         "Japanese",
@@ -81,12 +81,12 @@ fun LanguageSelectScreen(
                 val painter = imageList[it]
                 val shortLang = shortLangList[it]
                 ImageCard(
-                    shortLang,
-                    item,
-                    painter,
-                    item,
-                    onLangSelectClick,
-                    Modifier
+                    shortLang = shortLang,
+                    title = item,
+                    painter = painter,
+                    contentDescription = item,
+                    onLangSelectClick = onLangSelectClick,
+                    modifier = Modifier
                 )
             }
         }
@@ -101,7 +101,7 @@ fun ImageCard(
     title: String,
     painter: Painter,
     contentDescription: String,
-    onLangSelectClick: () -> Unit,
+    onLangSelectClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card (
@@ -150,11 +150,11 @@ fun ImageCard(
 
 @Preview
 @Composable
-fun Test(
+fun LangSelectPreview(
 
 ) {
     LanguageLearnerTheme(darkTheme = true) { LanguageSelectScreen (
-        onLangSelectClick = {}
+        onLangSelectClick = { }
     ) }
 
 }
