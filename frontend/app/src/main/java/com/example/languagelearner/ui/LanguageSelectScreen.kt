@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.languagelearner.R
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 
 @Composable
 fun LanguageSelectScreen(
@@ -90,6 +92,10 @@ fun LanguageSelectScreen(
                 )
             }
         }
+        val test = "{'1': 'Choice 1', '2': 'Choice 2', '3': 'Choice 3', '4': 'Choice 4'}".replace("'", "\"")
+        val testMap: Map<String, String> = Json.decodeFromString(test)
+        Text(test)
+        Text(testMap.toString())
     }
 }
 
