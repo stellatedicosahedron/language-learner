@@ -18,6 +18,8 @@ import com.example.languagelearner.ui.LoginScreen
 import com.example.languagelearner.ui.CreateAccountScreen
 import com.example.languagelearner.ui.LanguageSelectScreen
 import com.example.languagelearner.ui.LoginViewModel
+import com.example.languagelearner.ui.QuestionDisplay
+import com.example.languagelearner.ui.QuestionViewModel
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 import com.example.languagelearner.ui.QuizSelectScreen
 
@@ -27,8 +29,7 @@ enum class LLAScreen() {
     CreateAccount,
     LangSelect,
     QuizSelect,
-    ShortAnswer,
-    LongAnswer,
+    QuestionScreen,
     Result,
     Settings
 }
@@ -36,7 +37,8 @@ enum class LLAScreen() {
 @Composable
 fun MainDisplay(
     navController: NavHostController = rememberNavController(),
-    loginViewModel: LoginViewModel = viewModel()
+    loginViewModel: LoginViewModel = LoginViewModel(),
+    questionViewModel: QuestionViewModel = QuestionViewModel(),
 ) {
     LanguageLearnerTheme(darkTheme = true) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -46,6 +48,13 @@ fun MainDisplay(
                 startDestination = LLAScreen.Login.name, // the default page on startup
                 modifier = Modifier.padding(innerPadding)
             ) {
+                // figure out how to route this later
+                composable(route = LLAScreen.QuestionScreen.name) {
+                    QuestionDisplay(
+                        questionViewModel = questionViewModel
+                    )
+                }
+
                 // in this function body, each call to a composable function dictates behaviour
                 // at a different screen
                 composable(route = LLAScreen.Login.name) {
