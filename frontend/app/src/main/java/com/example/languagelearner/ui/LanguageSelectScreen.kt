@@ -92,7 +92,8 @@ fun LanguageSelectScreen(
                 )
             }
         }
-        val test = "{'1': 'Choice 1', '2': 'Choice 2', '3': 'Choice 3', '4': 'Choice 4'}".replace("'", "\"")
+        val test = "{'1': 'Choice 1', '2': 'Choice 2', '3': 'Choice 3', '4': 'Choice 4'}"
+            .replace("'", "\"")
         val testMap: Map<String, String> = Json.decodeFromString(test)
         Text(test)
         Text(testMap.toString())
