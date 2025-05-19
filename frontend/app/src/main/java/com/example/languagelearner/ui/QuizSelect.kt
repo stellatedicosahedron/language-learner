@@ -31,7 +31,8 @@ import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 fun QuizSelectScreen(
     modifier: Modifier = Modifier,
     onQuizSelectionClick: () -> Unit,
-    langViewModel: LangViewModel
+    langViewModel: LangViewModel,
+    questionViewModel: QuestionViewModel
 ) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,6 +63,7 @@ fun QuizSelectScreen(
                 onQuizSelectionClick
             )
         }
+        Text(questionViewModel.questions.toString())
     }
 }
 
@@ -128,6 +130,7 @@ fun QuizSelectPreview(
 ) {
     LanguageLearnerTheme(darkTheme = true) { QuizSelectScreen (
         langViewModel = LangViewModel(),
+        questionViewModel = QuestionViewModel(),
         onQuizSelectionClick = { }
     ) }
 

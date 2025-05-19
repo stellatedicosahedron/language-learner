@@ -40,6 +40,7 @@ fun MainDisplay(
     navController: NavHostController = rememberNavController(),
     loginViewModel: LoginViewModel = LoginViewModel(),
     questionViewModel: QuestionViewModel = QuestionViewModel(),
+    langViewModel: LangViewModel = LangViewModel()
 ) {
     LanguageLearnerTheme(darkTheme = true) {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -96,6 +97,7 @@ fun MainDisplay(
                         onLangSelectClick = {
                             shortLang: String -> langViewModel.updateShortLangSelection(shortLang)
                             langViewModel.getQuizzes()
+                            questionViewModel.getQuestions()
                             navController.navigate(LLAScreen.QuizSelect.name)
                         }
                     )
@@ -103,8 +105,9 @@ fun MainDisplay(
                 composable(route = LLAScreen.QuizSelect.name) {
                     QuizSelectScreen (
                         langViewModel = langViewModel,
+                        questionViewModel = questionViewModel,
                         onQuizSelectionClick = {
-                            navController.navigate(LLAScreen.Login.name)
+                            navController.navigate(LLAScreen.QuestionScreen.name)
                         }
                     )
                 }

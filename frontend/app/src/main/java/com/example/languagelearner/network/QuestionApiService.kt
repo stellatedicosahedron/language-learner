@@ -5,6 +5,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL = "https://language-learner-0zma.onrender.com"
 
@@ -14,8 +15,10 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface QuestionApiService {
-//    @GET("quiz/get_questions/") add an id here
-//    suspend fun getQuizzes(): List<Quiz>
+    @GET("quiz/get_questions/{id}")
+    suspend fun getQuestions(
+        @Path("id") id: Int
+    ): List<QuestionResponse>
 }
 
 object QuestionApi {
