@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.languagelearner.ui.LoginScreen
 import com.example.languagelearner.ui.CreateAccountScreen
+import com.example.languagelearner.ui.LangViewModel
 import com.example.languagelearner.ui.LanguageSelectScreen
 import com.example.languagelearner.ui.LoginViewModel
 import com.example.languagelearner.ui.QuestionDisplay
@@ -93,14 +94,19 @@ fun MainDisplay(
                 composable(route = LLAScreen.LangSelect.name) {
                     LanguageSelectScreen(
                         onLangSelectClick = {
+                            shortLang: String -> langViewModel.updateShortLangSelection(shortLang)
+                            langViewModel.getQuizzes()
                             navController.navigate(LLAScreen.QuizSelect.name)
                         }
                     )
                 }
                 composable(route = LLAScreen.QuizSelect.name) {
-                    QuizSelectScreen {
-
-                    }
+                    QuizSelectScreen (
+                        langViewModel = langViewModel,
+                        onQuizSelectionClick = {
+                            navController.navigate(LLAScreen.Login.name)
+                        }
+                    )
                 }
             }
         }

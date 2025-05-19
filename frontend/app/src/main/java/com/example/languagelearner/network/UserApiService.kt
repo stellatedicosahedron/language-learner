@@ -6,6 +6,7 @@ import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 private const val BASE_URL =
