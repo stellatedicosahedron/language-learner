@@ -46,7 +46,7 @@ fun MainDisplay(
 
             NavHost(
                 navController = navController,
-                startDestination = LLAScreen.Login.name, // the default page on startup
+                startDestination = LLAScreen.LangSelect.name, // the default page on startup
                 modifier = Modifier.padding(innerPadding)
             ) {
                 // figure out how to route this later
