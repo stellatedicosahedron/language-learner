@@ -56,6 +56,7 @@ fun QuestionDisplay (
         Spacer(modifier = Modifier.height(25.dp))
         Text(
             text = "PLACEHOLDER TEXT FOR THE QUESTION" ,
+            // replace this later with data from the viewmodel
             fontSize = 30.sp
         )
         Spacer(modifier = Modifier.height(25.dp))
@@ -173,6 +174,7 @@ fun QuestionOption (
         ) {
             Text(
                 text = "Option ${index + 1}",
+                // replace this later with questionViewModel.currQuestion.choices[index.toString()]
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .align(align)
