@@ -172,9 +172,11 @@ fun QuestionOption (
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(Color.hsv(0F, 0.04F, 0.21F))
         ) {
+            val id : Int = index + 1
+
             Text(
-                text = "Option ${index + 1}",
-                // replace this later with questionViewModel.currQuestion.choices[index.toString()]
+                // text = "Option ${index + 1}",
+                text = questionViewModel.currChoices[id.toString()]!!,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .align(align)

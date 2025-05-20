@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.languagelearner.network.QuestionApi
 import com.example.languagelearner.network.QuestionResponse
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -20,11 +22,22 @@ class QuestionViewModel : ViewModel() {
 
     // Change this later to list of questions
     // can then always find the current question by accessing the list at currIndex
-    var questions : List<QuestionResponse>? = null
+    var questions : List<QuestionResponse> = listOf(
+        QuestionResponse(1, "", "", 1, "", 1)
+    )
 
-    var currIndex : Int = 0
+    private var currIndex : Int = 0
 
-    var currQuestion = questions?.get(currIndex)
+    private var currQuestion = questions.get(currIndex)
+
+    var currChoices : Map<String, String> = convertMap(currQuestion.choices)
+
+    private fun convertMap (input: String): Map<String, String> {
+        if(currQuestion.choices == "") {
+            return mapOf("1" to "1", "2" to "2", "3" to "3", "4" to "4")
+        }
+        return Json.decodeFromString(input.replace("'", "\""))
+    }
 
     fun getQuestions() {
         viewModelScope.launch {
