@@ -28,9 +28,10 @@ class QuestionViewModel : ViewModel() {
 
     private var currIndex : Int = 0
 
-    private var currQuestion = questions.get(currIndex)
+    var currQuestion = questions.get(currIndex)
 
-    var currChoices : Map<String, String> = convertMap(currQuestion.choices)
+    // var currChoices : Map<String, String> = convertMap(currQuestion.choices)
+    var currChoices : Map<String, String> by mutableStateOf<Map<String,String>>(convertMap(currQuestion.choices))
 
     private fun convertMap (input: String): Map<String, String> {
         if(currQuestion.choices == "") {
@@ -45,6 +46,8 @@ class QuestionViewModel : ViewModel() {
                 // call the retrofit function to get all the questions from the current quiz
                 questions = QuestionApi.retrofitService
                     .getQuestions(selectedQuiz)
+                currQuestion = questions.get(currIndex)
+                currChoices = convertMap(currQuestion.choices)
             } catch (e: HttpException) {
                 // handle the exceptions
             } catch (e: IOException) {

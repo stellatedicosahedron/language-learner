@@ -55,7 +55,7 @@ fun QuestionDisplay (
         )
         Spacer(modifier = Modifier.height(25.dp))
         Text(
-            text = "PLACEHOLDER TEXT FOR THE QUESTION" ,
+            text = questionViewModel.currQuestion.question ,
             // replace this later with data from the viewmodel
             fontSize = 30.sp
         )
@@ -158,6 +158,7 @@ fun QuestionOption (
     questionViewModel: QuestionViewModel,
     modifier: Modifier = Modifier
 ) {
+    val id : Int = index + 1
     if (questionViewModel.currentSelection == index) {
         Box(
             modifier = Modifier
@@ -172,8 +173,6 @@ fun QuestionOption (
                 .clip(shape = RoundedCornerShape(10.dp))
                 .background(Color.hsv(0F, 0.04F, 0.21F))
         ) {
-            val id : Int = index + 1
-
             Text(
                 // text = "Option ${index + 1}",
                 text = questionViewModel.currChoices[id.toString()]!!,
@@ -199,7 +198,7 @@ fun QuestionOption (
                 .border(width = 1.dp, shape = RoundedCornerShape(10.dp), color = Color.White)
         ) {
             Text(
-                text = "Option ${index + 1}",
+                text = questionViewModel.currChoices[id.toString()]!!,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .align(align)

@@ -108,6 +108,8 @@ fun MainDisplay(
                         questionViewModel = questionViewModel,
                         onQuizSelectionClick = {
                             navController.navigate(LLAScreen.QuestionScreen.name)
+                            questionViewModel.selectedQuiz = langViewModel.selectedQuiz
+                            questionViewModel.getQuestions()
                         }
                     )
                 }

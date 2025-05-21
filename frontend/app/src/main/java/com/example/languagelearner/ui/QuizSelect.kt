@@ -60,7 +60,8 @@ fun QuizSelectScreen(
         langViewModel.quizList.forEach {
             quiz -> QuizCard(
                 quiz,
-                onQuizSelectionClick
+                onQuizSelectionClick,
+                langViewModel
             )
         }
         Text(questionViewModel.questions.toString())
@@ -70,13 +71,17 @@ fun QuizSelectScreen(
 @Composable
 fun QuizCard(
     quiz: Quiz,
-    onQuizSelectionClick: () -> Unit
+    onQuizSelectionClick: () -> Unit,
+    langViewModel: LangViewModel
 ) {
     OutlinedCard (
         modifier = Modifier
             .padding(15.dp)
             .fillMaxWidth(),
-        onClick = onQuizSelectionClick,
+        onClick = {
+            langViewModel.selectedQuiz = quiz.id
+            onQuizSelectionClick()
+                  },
         shape = RoundedCornerShape(10.dp),
 //        enabled = if (USERLEVEL >= REQ) true else false,
         enabled = true,
