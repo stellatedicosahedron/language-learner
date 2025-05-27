@@ -23,6 +23,8 @@ class LangViewModel : ViewModel() {
 
     var quizList by mutableStateOf<List<Quiz>>(listOf(Quiz(0, "Default Name", "na", 0, 0)))
 
+    var selectedQuiz by mutableStateOf(0)
+
     // state variables
     var languageSelection by mutableStateOf("")
         private set
