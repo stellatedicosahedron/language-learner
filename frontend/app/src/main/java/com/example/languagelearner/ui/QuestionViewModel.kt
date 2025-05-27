@@ -15,6 +15,11 @@ import kotlinx.serialization.json.Json
 import retrofit2.HttpException
 import java.io.IOException
 
+/*
+ *  A viewmodel mainly used for storing the states used when
+ *  displaying questions. Stores the current quiz, list of
+ *  questions, current question, and current choices.
+ */
 class QuestionViewModel : ViewModel() {
     var currentSelection : Int? by mutableStateOf(null)
 

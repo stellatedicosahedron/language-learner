@@ -35,6 +35,15 @@ import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 
+/*
+ *  A composable function for displaying the Language Selection
+ *  page in the application.
+ *
+ *  Displays a list of languages; Japanese, Korean, Chinese, and
+ *  French are the defaults.
+ *
+ *  Routes to the Quiz Selection page upon selecting a language.
+ */
 @Composable
 fun LanguageSelectScreen(
     modifier: Modifier = Modifier,
@@ -92,16 +101,13 @@ fun LanguageSelectScreen(
                 )
             }
         }
-        val test = "{'1': 'Choice 1', '2': 'Choice 2', '3': 'Choice 3', '4': 'Choice 4'}"
-            .replace("'", "\"")
-        val testMap: Map<String, String> = Json.decodeFromString(test)
-        Text(test)
-        Text(testMap.toString())
     }
 }
 
-// creates an image card
-// arguments are an image, description, title, and modifier
+/*
+ *  A composable function for creating an Image Card to
+ *  display a language's name and its associated image.
+ */
 @Composable
 fun ImageCard(
     shortLang: String,
@@ -157,11 +163,8 @@ fun ImageCard(
 
 @Preview
 @Composable
-fun LangSelectPreview(
-
-) {
+fun LangSelectPreview() {
     LanguageLearnerTheme(darkTheme = true) { LanguageSelectScreen (
         onLangSelectClick = { }
     ) }
-
 }

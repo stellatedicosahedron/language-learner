@@ -1,6 +1,5 @@
 package com.example.languagelearner.ui
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,6 +11,13 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
+/*
+ *  A viewmodel mainly used for storing the language selected
+ *  by the user on the Language Selection page.
+ *
+ *  Also stores the list of quizzes used for display on the Quiz
+ *  Selection page.
+ */
 class LangViewModel : ViewModel() {
     var errorMessage by mutableStateOf("")
 

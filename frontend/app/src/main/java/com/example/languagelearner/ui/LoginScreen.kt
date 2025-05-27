@@ -30,6 +30,17 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.languagelearner.R
 
+/*
+ *  A composable function for displaying the Login Screen page
+ *  in the application.
+ *
+ *  Displays Username and Password fields, with buttons for
+ *  navigating to the Create Account page and the Language
+ *  Selection page.
+ *
+ *  Routes to the Language Selection page upon successfully
+ *  logging in.
+ */
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
@@ -84,7 +95,9 @@ fun LoginScreen(
 
 }
 
-// Make one big composable for all the login fields
+/*
+ *  Creates a username field.
+ */
 @Composable
 fun UsernameField(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("") }
@@ -95,6 +108,9 @@ fun UsernameField(modifier: Modifier = Modifier) {
     )
 }
 
+/*
+ *  Creates a password field.
+ */
 @Composable
 fun PasswordField(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("") }
@@ -105,6 +121,9 @@ fun PasswordField(modifier: Modifier = Modifier) {
     )
 }
 
+/*
+ *  Creates a login field.
+ */
 @Composable
 fun LoginField(
     modifier: Modifier = Modifier,

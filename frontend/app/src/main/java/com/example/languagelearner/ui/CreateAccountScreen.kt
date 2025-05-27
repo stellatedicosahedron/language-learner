@@ -31,6 +31,14 @@ import com.example.languagelearner.R
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 import io.ktor.utils.io.core.Input
 
+/*
+ *  A composable function for displaying the Account Creation page
+ *  in the application.
+ *
+ *  Contains username, password, and confirm password fields.
+ *
+ *  Routes to the Login page upon successfully creating an account.
+ */
 @Composable
 fun CreateAccountScreen(
     modifier: Modifier = Modifier,
@@ -125,8 +133,6 @@ fun CreateAccountField(
         )
     }
 }
-
-// going to need to display a toast maybe if some fields are wrong
 
 @Preview
 @Composable

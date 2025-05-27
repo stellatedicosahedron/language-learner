@@ -36,6 +36,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 
+/*
+ *  A composable function for displaying the Question page
+ *  in the application.
+ *
+ *  Displays Questions by showing a prompt, question, and
+ *  4 choices, as well as a submit button.
+ *
+ *  Routes to Question display again when answering the question.
+ */
 @Composable
 fun QuestionDisplay (
     questionViewModel: QuestionViewModel,
@@ -87,6 +96,13 @@ fun QuestionDisplay (
     }
 }
 
+/*
+ *  A composable function for displaying the Long Answer
+ *  variant of the Question page.
+ *
+ *  When any of the 4 options is too long to be displayed
+ *  in the Short Answer variant, this page is used instead.
+ */
 @Composable
 fun LongAnswer (
     questionViewModel: QuestionViewModel,
@@ -118,6 +134,13 @@ fun LongAnswer (
     }
 }
 
+/*
+ *  A composable function for displaying the Short Answer
+ *  variant of the Question page.
+ *
+ *  This page is used by default unless any of the 4 choices
+ *  are too long to fit in this page format.
+ */
 @Composable
 fun ShortAnswer(
     questionViewModel: QuestionViewModel,
@@ -150,6 +173,10 @@ fun ShortAnswer(
 
 }
 
+/*
+ *  A composable function for displaying one of the
+ *  four question options on the Question page.
+ */
 @Composable
 fun QuestionOption (
     index: Int,
@@ -181,7 +208,6 @@ fun QuestionOption (
                 modifier = Modifier
                     .align(align)
                     .padding(8.dp)
-
             )
         }
     }
