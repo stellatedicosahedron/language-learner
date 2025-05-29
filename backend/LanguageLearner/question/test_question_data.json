@@ -16,6 +16,32 @@
         "pk": 2,
         "question": "Question 2",
         "prompt": "Prompt 2",
+        "answer": 1,
+        "choices": {
+            "1": "Choice A",
+            "2": "Choice B",
+            "3": "Choice C",
+            "4": "Choice D"
+        },
+        "quiz": 1
+    },
+    {
+        "pk": 3,
+        "question": "Question 3",
+        "prompt": "Prompt 3",
+        "answer": 1,
+        "choices": {
+            "1": "A",
+            "2": "B",
+            "3": "C",
+            "4": "D"
+        },
+        "quiz": 1
+    },
+    {
+        "pk": 4,
+        "question": "Question 2",
+        "prompt": "Prompt 2",
         "answer": 4,
         "choices": {
             "1": "Choice 2",
