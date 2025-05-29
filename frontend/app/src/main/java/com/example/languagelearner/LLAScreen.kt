@@ -23,6 +23,7 @@ import com.example.languagelearner.ui.QuestionDisplay
 import com.example.languagelearner.ui.QuestionViewModel
 import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 import com.example.languagelearner.ui.QuizSelectScreen
+import com.example.languagelearner.ui.ResultScreen
 
 // This class just serves as a list of names for each route in the app
 enum class LLAScreen() {
@@ -53,7 +54,16 @@ fun MainDisplay(
                 // figure out how to route this later
                 composable(route = LLAScreen.QuestionScreen.name) {
                     QuestionDisplay(
-                        questionViewModel = questionViewModel
+                        questionViewModel = questionViewModel,
+                        onNextButtonClick = {
+                            if (questionViewModel.currentSelection != null &&
+                                questionViewModel.nextQuestion()) {
+                                navController.navigate(LLAScreen.QuestionScreen.name)
+                            }
+                            else {
+                                navController.navigate(LLAScreen.Result.name)
+                            }
+                        }
                     )
                 }
 
@@ -110,6 +120,16 @@ fun MainDisplay(
                             navController.navigate(LLAScreen.QuestionScreen.name)
                             questionViewModel.selectedQuiz = langViewModel.selectedQuiz
                             questionViewModel.getQuestions()
+                            questionViewModel.resetQuiz()
+                        }
+                    )
+                }
+
+                composable(route = LLAScreen.Result.name) {
+                    ResultScreen(
+                        questionViewModel,
+                        onReturnButtonClick = {
+                            navController.popBackStack(LLAScreen.QuizSelect.name, false)
                         }
                     )
                 }

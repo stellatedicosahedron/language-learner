@@ -31,9 +31,22 @@ class QuestionViewModel : ViewModel() {
         QuestionResponse(1, "", "", 1, "", 1)
     )
 
-    private var currIndex : Int = 0
+    var currIndex : Int = 0
+
+    var maxQuestions : Int = questions.size
+
+    var score = 0
+
+    var answers : MutableList<Int?> = mutableListOf()
 
     var currQuestion = questions.get(currIndex)
+
+    var short by mutableStateOf(false)
+
+    val shortLength = 50
+    // this dictates what length a question is considered to be "short"
+    // due to how the choices are stored in a string, this just checks if the total length is a
+    // certain number, equivalent to checking against the average length of the choice
 
     // var currChoices : Map<String, String> = convertMap(currQuestion.choices)
     var currChoices : Map<String, String> by mutableStateOf<Map<String,String>>(convertMap(currQuestion.choices))
@@ -53,6 +66,8 @@ class QuestionViewModel : ViewModel() {
                     .getQuestions(selectedQuiz)
                 currQuestion = questions.get(currIndex)
                 currChoices = convertMap(currQuestion.choices)
+                maxQuestions = questions.size
+                short = computeShort()
             } catch (e: HttpException) {
                 // handle the exceptions
             } catch (e: IOException) {
@@ -60,6 +75,50 @@ class QuestionViewModel : ViewModel() {
             } catch (e: IndexOutOfBoundsException) {
                 // handle exception
             }
+        }
+    }
+
+    fun nextQuestion() : Boolean {
+        if (currIndex < maxQuestions - 1) {
+            currIndex++
+            currQuestion = questions.get(currIndex)
+            currChoices = convertMap(currQuestion.choices)
+            answers.add(currentSelection)
+            short = computeShort()
+
+            return true
+        }
+        else {
+            answers.add(currentSelection)
+            score = computeScore()
+            return false
+        }
+    }
+
+    fun resetQuiz() : Unit {
+        currIndex = 0
+        score = 0
+        currentSelection = null
+        answers = mutableListOf()
+        currQuestion = questions.get(currIndex)
+    }
+
+    private fun computeScore() : Int {
+        var score = 0
+        for (i in 0..< maxQuestions) {
+            if (answers[i]!! == questions[i].answer - 1) {
+                score ++
+            }
+        }
+        return score
+    }
+
+    private fun computeShort(): Boolean {
+        if (currQuestion.choices.length < shortLength) {
+            return true
+        }
+        else {
+            return false
         }
     }
 }

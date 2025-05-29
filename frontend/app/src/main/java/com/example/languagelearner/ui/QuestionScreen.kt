@@ -48,6 +48,7 @@ import com.example.languagelearner.ui.theme.LanguageLearnerTheme
 @Composable
 fun QuestionDisplay (
     questionViewModel: QuestionViewModel,
+    onNextButtonClick: () ->  Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -59,7 +60,7 @@ fun QuestionDisplay (
     ) {
         Spacer(modifier = Modifier.height(100.dp))
         Text(
-            text = "Question 1/n",
+            text = "Question ${questionViewModel.currIndex + 1}/${questionViewModel.maxQuestions}",
             fontSize = 30.sp
         )
         Spacer(modifier = Modifier.height(25.dp))
@@ -70,8 +71,7 @@ fun QuestionDisplay (
         )
         Spacer(modifier = Modifier.height(25.dp))
 
-        val short = true
-        // check string length of answers in the viewmodel instead once the backend is connected
+        val short = questionViewModel.short
 
         if (short) {
             ShortAnswer(questionViewModel)
@@ -88,7 +88,7 @@ fun QuestionDisplay (
         {
             Text("Selected Option: ${questionViewModel.currentSelection}")
             Button(
-                onClick = {}
+                onClick = onNextButtonClick
             ) {
                 Text( text = "Next")
             }
@@ -242,7 +242,7 @@ fun PagePreview (
 
 ) {
     LanguageLearnerTheme(darkTheme = true) {
-        QuestionDisplay(questionViewModel = QuestionViewModel())
+        QuestionDisplay(questionViewModel = QuestionViewModel(), {})
     }
 
 }
